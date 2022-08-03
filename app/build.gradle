@@ -1,0 +1,175 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id "kotlin-parcelize"
+//    id 'androidx.navigation.safeargs'
+//    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.apero.videoeditor"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+        def formattedDate = new Date().format('MMM.dd.yyyy')
+        archivesBaseName = "videoeditor-V(${versionCode})${versionName}_${formattedDate}"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
+    signingConfigs{
+        release {
+            storeFile file("key/release.jks")
+            storePassword "trustedapp@123"
+            keyAlias "release"
+            keyPassword "trustedapp@123"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        appTest {
+            manifestPlaceholders = [ ad_app_id:"ca-app-pub-3940256099942544~3347511713"]
+            buildConfigField "String", "ad_interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_appopen_resume", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ad_interstitial_solution", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_banner_main", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ad_native_steps", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native_solution", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native_exit", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native_history", "\"ca-app-pub-3940256099942544/2247696110\""
+
+        }
+        appRelease {
+            manifestPlaceholders = [ ad_app_id:"ca-app-pub-3940256099942544~3347511713"]
+            buildConfigField "String", "ad_interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_appopen_resume", "\"ca-app-pub-3940256099942544/3419835294\""
+            buildConfigField "String", "ad_interstitial_solution", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ad_banner_main", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "ad_native_steps", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native_solution", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native_exit", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ad_native_history", "\"ca-app-pub-3940256099942544/2247696110\""
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    lintOptions {
+        // if true, stop the gradle build if errors are found
+        abortOnError false
+        // set to true to turn off analysis progress reporting by lint
+        quiet false
+        // if true, only report errors
+        ignoreWarnings true
+        // if true, emit full/absolute paths to files with errors (true by default)
+        absolutePaths true
+        // location to write the output; can be a file or 'stdout' or 'stderr'
+        textOutput file("lint-results.txt")
+        baseline(file("lint.xml"))
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:'
+    testImplementation 'androidx.test.ext:junit-ktx:1.1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    //rate
+    implementation 'com.github.eGame-Global:AndModuleRate:1.1.4'
+    implementation 'com.google.android.play:core:1.10.2'
+
+    //ads
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+
+    //module ads Apero
+    implementation 'com.github.AperoVN:AperoModuleAds:2.3.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //init firebase
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-config'
+    implementation 'com.google.firebase:firebase-config'
+
+    //ui
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.4.0-rc01'
+    implementation 'com.facebook.fresco:fresco:2.3.0'
+
+    //dagger
+    implementation 'com.google.dagger:dagger-android:2.35.1'
+    implementation 'com.google.dagger:dagger-android-support:2.28.3'
+    kapt 'com.google.dagger:dagger-compiler:2.40.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.28.3'
+
+    //rx
+    implementation "io.reactivex.rxjava2:rxjava:2.2.20"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+    //arch-comp Lifecycles, LiveData, and ViewModel
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+
+    //lottiefiles
+    implementation "com.airbnb.android:lottie:3.6.1"
+    
+    //sharePreference
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'com.facebook.android:facebook-android-sdk:12.0.1'
+
+    implementation 'com.github.yangjie10930:EpMedia:v1.0.1'
+
+
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+
+    <issue id="HardcodedText" severity="error" />
+    <!-- Duplicated icons under different names -->
+    <issue id="IconDuplicates" severity="error" />
+    <issue id="InvalidPermission" severity="error" />
+    <!-- Class is not registered in the manifest -->
+    <issue id="Registered" severity="error" />
+    <!-- Hardcoded reference to /sdcard -->
+    <issue id="SdCardPath" severity="error" />
+
+</lint>

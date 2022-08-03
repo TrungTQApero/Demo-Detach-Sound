@@ -1,0 +1,20 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="size_bubble_icon">48dp</dimen>
+
+    <dimen name="seek_bar_thickness">4dp</dimen>
+    <dimen name="seek_bar_thumb_size">20dp</dimen>
+
+    <dimen name="navDrawer_header_height">170dp</dimen>
+
+    <dimen name="row_height">64.0dip</dimen>
+    <dimen name="screen_padding_10">10.0dip</dimen>
+    <dimen name="screen_padding_5">5.0dip</dimen>
+    <dimen name="screen_padding_2">2.0dip</dimen>
+    <dimen name="item_ic_padding">14.0dip</dimen>
+
+    <dimen name="text_sum_size">15sp</dimen>
+    <dimen name="text_details">12.5sp</dimen>
+
+</resources>
